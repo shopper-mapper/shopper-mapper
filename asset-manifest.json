@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/shopper-mapper/static/css/main.5f361e03.chunk.css",
+    "main.js": "/shopper-mapper/static/js/main.b938f8ac.chunk.js",
+    "main.js.map": "/shopper-mapper/static/js/main.b938f8ac.chunk.js.map",
+    "runtime-main.js": "/shopper-mapper/static/js/runtime-main.6c0cfe4a.js",
+    "runtime-main.js.map": "/shopper-mapper/static/js/runtime-main.6c0cfe4a.js.map",
+    "static/js/2.58f81cf1.chunk.js": "/shopper-mapper/static/js/2.58f81cf1.chunk.js",
+    "static/js/2.58f81cf1.chunk.js.map": "/shopper-mapper/static/js/2.58f81cf1.chunk.js.map",
+    "index.html": "/shopper-mapper/index.html",
+    "precache-manifest.137e36efd41ef7aa347b6bb952d8727e.js": "/shopper-mapper/precache-manifest.137e36efd41ef7aa347b6bb952d8727e.js",
+    "service-worker.js": "/shopper-mapper/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/shopper-mapper/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.58f81cf1.chunk.js.LICENSE.txt": "/shopper-mapper/static/js/2.58f81cf1.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/shopper-mapper/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6c0cfe4a.js",
+    "static/js/2.58f81cf1.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.b938f8ac.chunk.js"
+  ]
+}
