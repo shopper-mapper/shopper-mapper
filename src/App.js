@@ -24,11 +24,11 @@ class App extends Component {
         responseType: "JSON",
         params: {
           // Passing long, lat from  (Get Geocode Address API see below) to check the response
-          location: [-79.381713, 43.651893],
+          location: "-79.381713, 43.651893",
           key: "RSBH9KbMvmkRzdRkD8Joil8TqbXW3HvB",
           sort: "relevance",
           // By default is museum, we'll interpolate user input instead
-          q: "museum",
+          q: "restaurant",
         }
       })
 
@@ -59,7 +59,7 @@ class App extends Component {
       })
 
 
-      console.log(lat, lng);
+      console.log(lat, lng); // lat long
 
       // Handle error if promise is rejected
     } catch (error) {
