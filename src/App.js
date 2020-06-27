@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import Directions from './Directions';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 
 class App extends Component {
 
@@ -73,6 +76,10 @@ class App extends Component {
       <div>
         <h1>Shopper - Mapper</h1>
         <Directions />
+
+
+        <FontAwesomeIcon icon={faGlobeAmericas} size="2x"/>
+        <FontAwesomeIcon icon={faLinkedin} size="2x"/>
       </div>
     );
   }
