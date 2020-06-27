@@ -5,6 +5,8 @@ import Directions from './Directions';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
+import MapSearch from './Map';
+import Form from './Form';
 
 class App extends Component {
 
@@ -12,27 +14,35 @@ class App extends Component {
     super();
 
     this.state = {
-      queryFromApi: [],
-      userInputlocation: '',
+      queryList: [],
+      // Comes from input
+      userLocation: '',
+      // Comes from input
+      userQuery: '',
+      // Comes from API call
+      coordinates: '',
+
     }
   }
 
 
-  async componentDidMount() {
+  async getQueries() {
     //  Pass lat/long from (Geocode Address API) here ↓ , in (Place Search API)
     try {
       // Retrieve query results + await for a promise to be resolved
       const { data: { results } } = await axios({
-        url: "http://www.mapquestapi.com//search/v4/place",
+        url: `http://www.mapquestapi.com//search/v4/place`,
         method: "GET",
-        responseType: "JSON",
+        responseType: "json",
         params: {
           // Passing long, lat from  (Get Geocode Address API see below) to check the response
-          location: "-79.381713, 43.651893",
+          // location: "-79.381713, 43.651893",
+          location: this.state.coordinates,
           key: "RSBH9KbMvmkRzdRkD8Joil8TqbXW3HvB",
           sort: "relevance",
           // By default is museum, we'll interpolate user input instead
-          q: "restaurant",
+          // Passing value from input
+          q: this.state.userQuery,
         }
       })
 
@@ -40,7 +50,7 @@ class App extends Component {
 
       // Update state with the results data from an API call
       this.setState({
-        queryFromApi: results,
+        queryList: results,
       })
 
       // Handle error if promise is rejected
@@ -54,14 +64,19 @@ class App extends Component {
       const { data: { results: [{ locations: [{ latLng: { lat, lng } }] }] } } = await axios({
         url: `http://www.mapquestapi.com/geocoding/v1/address`,
         method: "GET",
-        responseType: "JSON",
+        responseType: "json",
         params: {
           key: "RSBH9KbMvmkRzdRkD8Joil8TqbXW3HvB",
           // Default value, insted we'll interpolate user input
-          location: "Toronto,ON",
+          // Passing value from input
+          // location: 'Toronto, ON',
+          location: this.state.userLocation, 
         }
       })
 
+      this.setState({
+        coordinates: `${lng}, ${lat}`,
+      })
 
       console.log(lat, lng); // lat long
 
@@ -71,15 +86,33 @@ class App extends Component {
     }
   }
 
+
+  handleClick = async (e, location, query) => {
+    e.preventDefault();
+
+    await this.getQueries();
+
+    this.setState({
+      userLocation: location,
+      userQuery: query,
+    })
+
+    console.log(this.state.userLocation);
+
+  }
+
   render() {
     return (
-      <div>
-        <h1>Shopper - Mapper</h1>
+      <div className="container">
+        <h1 className="title">Shopper - Mapper</h1>
+
+        <Form handleClick={this.handleClick} />
         <Directions />
 
 
-        <FontAwesomeIcon icon={faGlobeAmericas} size="2x"/>
-        <FontAwesomeIcon icon={faLinkedin} size="2x"/>
+        <MapSearch />
+        <FontAwesomeIcon icon={faGlobeAmericas} size="2x" />
+        <FontAwesomeIcon icon={faLinkedin} size="2x" />
       </div>
     );
   }
