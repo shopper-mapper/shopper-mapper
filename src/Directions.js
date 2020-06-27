@@ -13,24 +13,9 @@ class Directions extends Component {
     super();
 
     this.state = {
-      startingLocation: '',
-      route: '',
+      directions: [],
     }
   }
-
-  // async componentDidMount() {
-  //   try {
-  //     // Retrieve query results + await for a promise to be resolved
-  //     const { data: { results } } = await axios({
-  //       url: "http://www.mapquestapi.com/directions/v2/route",
-  //       method: "GET",
-  //       responseType: "json",
-  //       params: {
-  //         key: "RSBH9KbMvmkRzdRkD8Joil8TqbXW3HvB", 
-  //         from: "Royal Ontario Museum, 100 Queens Pk, TORONTO, ON M5S2C6",
-  //         to: "Art Gallery of Ontario, 317 Dundas Street E, Toronto, ON M5T",
-  //       }
-      // })
 
   componentDidMount() {
     axios({
@@ -43,10 +28,13 @@ class Directions extends Component {
         to: "Art Gallery of Ontario, 317 Dundas Street E, Toronto, ON M5T",
       }
     }).then((response) => {
-      response = response.data.route.legs
-      console.log(response);
+      response = response.data.route.legs[0].maneuvers
+      for (let i = 0; i < response.length; i++) {
+        console.log(response[i].narrative)
+        const directions = (response[i].narrative)
+      }
       this.setState({
-        route: response
+        // route: directions,
       })
     })
   }
@@ -58,6 +46,7 @@ class Directions extends Component {
   render() {
     return (
       <div>
+        <p></p>
       </div>
     );
   }
