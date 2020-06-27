@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import Directions from './Directions';
 
 class App extends Component {
 
@@ -71,6 +72,7 @@ class App extends Component {
     return (
       <div>
         <h1>Shopper - Mapper</h1>
+        <Directions />
       </div>
     );
   }
