@@ -21,7 +21,7 @@ class Directions extends Component {
     axios({
       url: "http://www.mapquestapi.com/directions/v2/route",
       method: "GET",
-      responseType: "json",
+      responseType: "jsonp",
       params: {
         key: "RSBH9KbMvmkRzdRkD8Joil8TqbXW3HvB",
         from: "Royal Ontario Museum, 100 Queens Pk, TORONTO, ON M5S2C6",
