@@ -12,12 +12,12 @@ class SearchList extends Component {
             <div>
                 {
                 this.props.query.length > 0 ? 
-                this.props.query.map (umie => {
+                this.props.query.map (results => {
                     return (
-                    <button key={umie.id}
-                    id={umie.id}
-                    value ={umie.displayString}
-                    onClick={this.searchResult}>{umie.displayString}</button>
+                    <button key={results.id}
+                    id={results.id}
+                    value ={results.displayString}
+                    onClick={this.searchResult}>{results.displayString}</button>
                     )
                 })
                 : <p>No results!</p>
