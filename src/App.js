@@ -7,6 +7,7 @@ import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 // import MapSearch from './MapSearch';
 import Form from './Form';
 import SearchList from './SearchList.js';
+import StaticMap from './StaticMap.js';
 import Directions from './Directions.js';
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
@@ -124,6 +125,7 @@ class App extends Component {
 
         <Directions directionsArray={this.state.directions}/>
 
+        <StaticMap/>
         {/* <MapSearch queryList={this.state.queryList || []} coordinates={this.state.coordinates} /> */}
         <FontAwesomeIcon icon={faGlobeAmericas} size="2x" />
         <FontAwesomeIcon icon={faLinkedin} size="2x" />
