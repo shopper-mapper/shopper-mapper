@@ -109,28 +109,6 @@ class App extends Component {
           console.log(this.state.directions);
         })
 
-
-        axios({
-          method: 'GET',
-          url: 'https://www.mapquestapi.com/staticmap/v5/map',
-          responseType: 'blob',
-          params: {
-            key: `tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15`,
-            scalebar: 'true|bottom',
-            start: this.state.location,
-            end: this.state.destination,
-            // locations: `43.6532,-79.3832||42.3149,-83.0364`,
-            // shape: `radius:10km|Toronto, ON`,
-            size: '600,600'
-          }
-        }).then((response) => {
-          this.setState({
-            mapImageData: URL.createObjectURL(response.data),
-          })
-          console.log(response);
-        })
-        //console.log (this.state.mapImageData)
-
       } catch (e) {
         console.log(e);
       }
