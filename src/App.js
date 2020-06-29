@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import './App.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 // import MapSearch from './MapSearch';
-import Form from './Form';
+import Header from './Form';
 import SearchList from './SearchList.js';
 import StaticMap from './StaticMap.js';
 import Directions from './Directions.js';
@@ -24,6 +24,10 @@ class App extends Component {
       directions: [],
       mapImageData: '',
     }
+  }
+
+  async componentDidMount() {
+
   }
 
 
@@ -59,7 +63,7 @@ class App extends Component {
       this.setState({
         queryList: results,
         searchResults: true,
-        location: location,
+        location,
         // coordinates: `${lng}, ${lat}`,
       })
 
@@ -76,81 +80,66 @@ class App extends Component {
 
     await this.getQueries(location, query);
   }
-  
+
   // handles the directions when user clicks a destination
   destinationClick = (toAddress) => {
     this.setState({
       destination: toAddress,
     }, () => {
-    console.log (this.state.location);
-    console.log (this.state.destination);
+      console.log(this.state.location);
+      console.log(this.state.destination);
 
-    try {
-      axios({
-        url: "http://www.mapquestapi.com/directions/v2/route",
-        method: "GET",
-        responseType: "json",
-        params: {
-          key: API_KEY,
-          from: this.state.location,
-          to: this.state.destination,
-        }
-      }).then((response) => {
-        response = response.data.route.legs[0].maneuvers
-
-        this.setState({
-          directions: response,
-        })
-        console.log(this.state.directions);
-      })
+      try {
         axios({
-          method: 'GET',
-          url: 'https://www.mapquestapi.com/staticmap/v5/map',
-          responseType: 'blob',
+          url: "http://www.mapquestapi.com/directions/v2/route",
+          method: "GET",
+          responseType: "json",
           params: {
-            key: `tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15`,
-            scalebar: 'true|bottom',
-            //   start: `Toronto, ON`,
-            //   end: `Windsor, ON`,
-            locations: `43.6532,-79.3832||42.3149,-83.0364`,
-            shape: `radius:10km|Toronto, ON`,
-            size: '600,600'
+            key: API_KEY,
+            from: this.state.location,
+            to: this.state.destination,
           }
-        }).then( (response) => {
+        }).then((response) => {
+          response = response.data.route.legs[0].maneuvers
+
           this.setState({
-            mapImageData: URL.createObjectURL(response.data),
-            
+            directions: response,
           })
-          console.log(response.data)
-        })      
-    } catch (e){
-      console.log(e);
-    }
-  })
-}
+          console.log(this.state.directions);
+        })
+
+      } catch (e) {
+        console.log(e);
+      }
+    })
+  }
 
   render() {
     return (
-      <div className="container">
-        <h1 className="title">Shopper - Mapper</h1>
+      <Fragment>
+        <div className="wrapper">
+          <div className="container">
 
-        <Form handleClick={this.handleClick} />
 
-        {
-          this.state.searchResults ?
-        <SearchList query={this.state.queryList}
-        onClick={this.destinationClick}/>
-        : <div/>
-        }
+            <h1 className="title">Shopper - Mapper</h1>
+            <Header handleClick={this.handleClick} />
 
-        <Directions directionsArray={this.state.directions}/>
+            {
+              this.state.searchResults ?
+                <SearchList query={this.state.queryList}
+                  onClick={this.destinationClick} />
+                : <div />
+            }
 
-        {/* <StaticMap/> */}
-        <img src={this.state.mapImageData} />
-        {/* <MapSearch queryList={this.state.queryList || []} coordinates={this.state.coordinates} /> */}
-        <FontAwesomeIcon icon={faGlobeAmericas} size="2x" />
-        <FontAwesomeIcon icon={faLinkedin} size="2x" />
-      </div>
+            <Directions directionsArray={this.state.directions} />
+
+            <StaticMap mapImageData={this.state.mapImageData} />
+            {/* <MapSearch queryList={this.state.queryList || []} coordinates={this.state.coordinates} /> */}
+            {/* <FontAwesomeIcon icon={faGlobeAmericas} size="2x" /> */}
+            {/* <FontAwesomeIcon icon={faLinkedin} size="2x" /> */}
+          </div>
+        </div>
+      </Fragment>
     );
   }
 }
