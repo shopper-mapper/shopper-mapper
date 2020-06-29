@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 
 
 
-class Form extends Component {
+class Header extends Component {
 
     constructor() {
         super();
@@ -29,22 +31,26 @@ class Form extends Component {
 
     render() {
         return (
-            <form action="">
-          <div className="row">
-            <div>
-              <label htmlFor="searchLocation">Enter location:</label>
-              <input onChange={this.handleChangeLocation} type="text" name="" id="searchLocation" />
-            </div>
-            <div>
-              <label htmlFor="searchQuery">Enter query:</label>
-              <input onChange={this.handleChangeQuery} type="text" name="" id="searchQuery" />
-            </div>
-          </div>
+            <header className="header">
+                <form className="row" action="">
+                    <div className="header-search col-auto">
+                        <div>
+                            <label className="sr-only" htmlFor="searchLocation">Enter location:</label>
+                            <input className="input input-location" onChange={this.handleChangeLocation} type="text" name="searchLocation" id="searchLocation" placeholder="Your location" />
+                        </div>
+                        <div>
+                            <label className="sr-only" htmlFor="searchQuery">Enter query:</label>
+                            <input className="input input-query" onChange={this.handleChangeQuery} type="text" name="searchQuery" id="searchQuery" placeholder="Your query" />
+                        </div>
+                    </div>
 
-          <button className="button" onClick={(event) => this.props.handleClick( event, this.state.userInputlocation, this.state.userInputQuery,)} type='submit'>Find!</button>
-        </form>
+                    <div className="col-auto">
+                        <button className="button" onClick={(event) => this.props.handleClick(event, this.state.userInputlocation, this.state.userInputQuery,)} type='submit'><FontAwesomeIcon icon={faGlobeAmericas} size="2x" /></button>
+                    </div>
+                </form>
+            </header>
         )
     }
 }
 
-export default Form;
+export default Header;

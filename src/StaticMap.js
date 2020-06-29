@@ -44,7 +44,7 @@ class StaticMap extends Component {
   render() {
     return (
       <div>
-        <img src = {this.state.mapImageData}/>
+        <img src={this.props.mapImageData} alt=''/>
       </div>
     );
   }
