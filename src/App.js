@@ -22,8 +22,7 @@ class App extends Component {
       searchResults: false,
       destination: '',
       directions: [],
-      mapImageData: [],
-      location: '',
+      mapImageData: '',
     }
   }
 
@@ -114,7 +113,6 @@ class App extends Component {
       }
     })
   }
-
 
   render() {
     return (
