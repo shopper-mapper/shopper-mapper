@@ -23,6 +23,7 @@ class App extends Component {
       destination: '',
       directions: [],
       mapImageData: '',
+      location: '',
     }
   }
 
@@ -59,7 +60,7 @@ class App extends Component {
       this.setState({
         queryList: results,
         searchResults: true,
-        location: location,
+        location,
         // coordinates: `${lng}, ${lat}`,
       })
 
@@ -69,12 +70,51 @@ class App extends Component {
     }
   }
 
+  // function to map through the queryList array *Someone fix please
+  // searchResultsArray = () => {
+  //   // return this.state.queryList
+
+  //   let searchResults = this.state.queryList.map( => {
+
+  //   })
+
+  // }
 
   // Handle button click
   handleClick = async (e, location, query) => {
     e.preventDefault();
 
     await this.getQueries(location, query);
+    // when user inputs location and query
+    // have the map to render the user location and query list with markers
+    try {
+      const mapData = await axios({
+        method: 'GET',
+        url: 'https://www.mapquestapi.com/staticmap/v5/map',
+        responseType: 'blob',
+        params: {
+          key: `tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15`,
+          scalebar: 'true|bottom',
+          // passes the user current location and the query list addresses
+          // this can be obtained by grabbing the displayString that holds the address
+          // replace ${this.state.queryList[0].displayString} with the function call above
+          locations: `${this.state.location} || ${this.state.queryList[0].displayString}`,
+          shape: `radius:10km|${this.state.location}`,
+          size: '600,600'
+        }
+      })
+      console.log(this.state.queryList);
+      // console.log(this.state.queryList.displayString);
+      
+      this.setState({
+        mapImageData : URL.createObjectURL(mapData.data),
+      })
+      //console.log (this.state.mapImageData)
+
+
+    } catch (error) {
+        console.log(`Axios request is failed ${error}`);
+    }
   }
   
   // handles the directions when user clicks a destination
@@ -102,7 +142,7 @@ class App extends Component {
           directions: response,
         })
         console.log(this.state.directions);
-      })
+      })// when user clicks on a destination button, it will render the map from the api call to show the route
         axios({
           method: 'GET',
           url: 'https://www.mapquestapi.com/staticmap/v5/map',
@@ -110,10 +150,8 @@ class App extends Component {
           params: {
             key: `tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15`,
             scalebar: 'true|bottom',
-            //   start: `Toronto, ON`,
-            //   end: `Windsor, ON`,
-            locations: `43.6532,-79.3832||42.3149,-83.0364`,
-            shape: `radius:10km|Toronto, ON`,
+            start: this.state.location,
+            end: this.state.destination,
             size: '600,600'
           }
         }).then( (response) => {
