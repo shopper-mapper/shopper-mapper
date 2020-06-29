@@ -22,6 +22,7 @@ class App extends Component {
       searchResults: false,
       destination: '',
       directions: [],
+      mapImageData: '',
     }
   }
 
@@ -102,12 +103,31 @@ class App extends Component {
         })
         console.log(this.state.directions);
       })
+        axios({
+          method: 'GET',
+          url: 'https://www.mapquestapi.com/staticmap/v5/map',
+          responseType: 'blob',
+          params: {
+            key: `tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15`,
+            scalebar: 'true|bottom',
+            //   start: `Toronto, ON`,
+            //   end: `Windsor, ON`,
+            locations: `43.6532,-79.3832||42.3149,-83.0364`,
+            shape: `radius:10km|Toronto, ON`,
+            size: '600,600'
+          }
+        }).then( (response) => {
+          this.setState({
+            mapImageData: URL.createObjectURL(response.data),
+            
+          })
+          console.log(response.data)
+        })      
     } catch (e){
       console.log(e);
     }
   })
 }
-
 
   render() {
     return (
@@ -125,7 +145,8 @@ class App extends Component {
 
         <Directions directionsArray={this.state.directions}/>
 
-        <StaticMap/>
+        {/* <StaticMap/> */}
+        <img src={this.state.mapImageData} />
         {/* <MapSearch queryList={this.state.queryList || []} coordinates={this.state.coordinates} /> */}
         <FontAwesomeIcon icon={faGlobeAmericas} size="2x" />
         <FontAwesomeIcon icon={faLinkedin} size="2x" />

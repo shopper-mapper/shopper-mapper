@@ -11,7 +11,7 @@ class StaticMap extends Component {
   }
 
 
-  async componentDidMount() {
+  async mapImage() {
     try {
           const mapData = await axios({
             method: 'GET',
@@ -23,7 +23,7 @@ class StaticMap extends Component {
             //   start: `Toronto, ON`,
             //   end: `Windsor, ON`,
               locations: `43.6532,-79.3832||42.3149,-83.0364`,
-            //   shape: `radius:10km|Toronto, ON`,
+              shape: `radius:10km|Toronto, ON`,
               size: '600,600'
             }
           })
