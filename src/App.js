@@ -6,7 +6,6 @@ import SearchList from './components/SearchList.js';
 import StaticMap from './components/StaticMap.js';
 import Directions from './components/Directions.js';
 import Main from './Main';
-// import map from './assets/map.jpg'
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
 
@@ -89,6 +88,12 @@ class App extends Component {
           size: '600,600'
         }
       })
+      
+      console.log(this.state.queryList.map()) 
+
+
+  
+
 
       this.setState({
         mapImageData: URL.createObjectURL(mapData.data),
