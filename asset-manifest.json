@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/shopper-mapper/static/css/main.18e19915.chunk.css",
-    "main.js": "/shopper-mapper/static/js/main.5a5fc34f.chunk.js",
-    "main.js.map": "/shopper-mapper/static/js/main.5a5fc34f.chunk.js.map",
+    "main.js": "/shopper-mapper/static/js/main.a8a68282.chunk.js",
+    "main.js.map": "/shopper-mapper/static/js/main.a8a68282.chunk.js.map",
     "runtime-main.js": "/shopper-mapper/static/js/runtime-main.6c0cfe4a.js",
     "runtime-main.js.map": "/shopper-mapper/static/js/runtime-main.6c0cfe4a.js.map",
     "static/js/2.ed196142.chunk.js": "/shopper-mapper/static/js/2.ed196142.chunk.js",
     "static/js/2.ed196142.chunk.js.map": "/shopper-mapper/static/js/2.ed196142.chunk.js.map",
     "index.html": "/shopper-mapper/index.html",
-    "precache-manifest.321752a12f34b0dfdb60320a458a545f.js": "/shopper-mapper/precache-manifest.321752a12f34b0dfdb60320a458a545f.js",
+    "precache-manifest.b7ccd629f388d7bc4b5090c9194cb859.js": "/shopper-mapper/precache-manifest.b7ccd629f388d7bc4b5090c9194cb859.js",
     "service-worker.js": "/shopper-mapper/service-worker.js",
     "static/css/main.18e19915.chunk.css.map": "/shopper-mapper/static/css/main.18e19915.chunk.css.map",
     "static/js/2.ed196142.chunk.js.LICENSE.txt": "/shopper-mapper/static/js/2.ed196142.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.6c0cfe4a.js",
     "static/js/2.ed196142.chunk.js",
     "static/css/main.18e19915.chunk.css",
-    "static/js/main.5a5fc34f.chunk.js"
+    "static/js/main.a8a68282.chunk.js"
   ]
 }
