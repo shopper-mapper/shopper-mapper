@@ -318,11 +318,19 @@ html {
 }
 
 body {
-  background-image: linear-gradient(to top, rgba(118, 198, 256, 0.6), #ffffff);
+  background-image: linear-gradient(
+    to top,
+    rgb(95, 82, 130),
+    rgb(117, 108, 165),
+    rgb(101, 101, 166)
+  );
   background-repeat: no-repeat;
   background-size: cover;
   line-height: 1.2;
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 ul {
@@ -369,16 +377,20 @@ a {
   margin: 0 20px;
 }
 
+.col-50 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
 .container {
-  max-width: 80%;
+  max-width: 75%;
   margin: 0 auto;
 }
 
 /* Header component */
 .header {
-  background-color: rgba(118, 198, 256, 0.7);
-  padding: 30px 40px;
-  border-radius: 10px;
+  background-color: rgba(65, 64, 124, 0.8);
+  padding: 20px 40px;
 }
 
 form.row {
@@ -388,25 +400,25 @@ form.row {
 .input {
   border: unset;
   background-color: unset;
-  color: #000;
+  color: #ffffff;
   padding: 10px 20px;
 }
 
 .input-location {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #ffffff;
 }
 
 .button {
   padding: 10px;
-  background-color: rgba(255,255,255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   border: unset;
   font-size: 1rem;
   transition: all 250ms ease-in-out;
 }
 
+/* Main component */
 
-.title {
-  font-size: 1rem;
-  margin-bottom: 20px;
+.search-list {
+  background-color: #ffffff;
 }

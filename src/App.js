@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
-// import MapSearch from './MapSearch';
-import Form from './Form';
+import Header from './Header';
 import SearchList from './SearchList.js';
 import StaticMap from './StaticMap.js';
 import Directions from './Directions.js';
+import Main from './Main';
+import map from './assets/map.jpg'
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
 
@@ -105,44 +103,44 @@ class App extends Component {
       })
       console.log(this.state.queryList);
       // console.log(this.state.queryList.displayString);
-      
+
       this.setState({
-        mapImageData : URL.createObjectURL(mapData.data),
+        mapImageData: URL.createObjectURL(mapData.data),
       })
       //console.log (this.state.mapImageData)
 
 
     } catch (error) {
-        console.log(`Axios request is failed ${error}`);
+      console.log(`Axios request is failed ${error}`);
     }
   }
-  
+
   // handles the directions when user clicks a destination
   destinationClick = (toAddress) => {
     this.setState({
       destination: toAddress,
     }, () => {
-    console.log (this.state.location);
-    console.log (this.state.destination);
+      console.log(this.state.location);
+      console.log(this.state.destination);
 
-    try {
-      axios({
-        url: "http://www.mapquestapi.com/directions/v2/route",
-        method: "GET",
-        responseType: "json",
-        params: {
-          key: API_KEY,
-          from: this.state.location,
-          to: this.state.destination,
-        }
-      }).then((response) => {
-        response = response.data.route.legs[0].maneuvers
+      try {
+        axios({
+          url: "http://www.mapquestapi.com/directions/v2/route",
+          method: "GET",
+          responseType: "json",
+          params: {
+            key: API_KEY,
+            from: this.state.location,
+            to: this.state.destination,
+          }
+        }).then((response) => {
+          response = response.data.route.legs[0].maneuvers
 
-        this.setState({
-          directions: response,
-        })
-        console.log(this.state.directions);
-      })// when user clicks on a destination button, it will render the map from the api call to show the route
+          this.setState({
+            directions: response,
+          })
+          console.log(this.state.directions);
+        })// when user clicks on a destination button, it will render the map from the api call to show the route
         axios({
           method: 'GET',
           url: 'https://www.mapquestapi.com/staticmap/v5/map',
@@ -154,40 +152,42 @@ class App extends Component {
             end: this.state.destination,
             size: '600,600'
           }
-        }).then( (response) => {
+        }).then((response) => {
           this.setState({
             mapImageData: URL.createObjectURL(response.data),
-            
+
           })
           console.log(response.data)
-        })      
-    } catch (e){
-      console.log(e);
-    }
-  })
-}
+        })
+      } catch (e) {
+        console.log(e);
+      }
+    })
+  }
+
 
   render() {
     return (
       <div className="container">
-        <h1 className="title">Shopper - Mapper</h1>
+        <Header handleClick={this.handleClick} />
+        <Main>
+          <div className="row">
+            <div className="search-list col-50">
+              {
+                this.state.searchResults ?
+                  <SearchList query={this.state.queryList}
+                    onClick={this.destinationClick} />
+                  : <div />
+              }
+            </div>
+            <div className="col-50">
+              {this.state.mapImageData ? <img src={this.state.mapImageData} alt="map"/> : <img src={map} alt="anothermap"/>} 
+            </div>
+          </div>
+          <Directions directionsArray={this.state.directions} />
+        </Main>
 
-        <Form handleClick={this.handleClick} />
 
-        {
-          this.state.searchResults ?
-        <SearchList query={this.state.queryList}
-        onClick={this.destinationClick}/>
-        : <div/>
-        }
-
-        <Directions directionsArray={this.state.directions}/>
-
-        {/* <StaticMap/> */}
-        <img src={this.state.mapImageData} />
-        {/* <MapSearch queryList={this.state.queryList || []} coordinates={this.state.coordinates} /> */}
-        <FontAwesomeIcon icon={faGlobeAmericas} size="2x" />
-        <FontAwesomeIcon icon={faLinkedin} size="2x" />
       </div>
     );
   }
