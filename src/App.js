@@ -6,7 +6,7 @@ import SearchList from './components/SearchList.js';
 import StaticMap from './components/StaticMap.js';
 import Directions from './components/Directions.js';
 import Main from './Main';
-import map from './assets/map.jpg'
+// import map from './assets/map.jpg'
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
 
@@ -31,7 +31,7 @@ class App extends Component {
     try {
       // Retrieve coordinates data (lat, long) + await for a promise to be resolved
       const { data: { results: [{ locations: [{ latLng: { lat, lng } }] }] } } = await axios({
-        url: `http://www.mapquestapi.com/geocoding/v1/address`,
+        url: `https://www.mapquestapi.com/geocoding/v1/address`,
         method: "GET",
         responseType: "json",
         params: {
@@ -42,7 +42,7 @@ class App extends Component {
 
       // Retrieve query results + await for a promise to be resolved
       const { data: { results } } = await axios({
-        url: `http://www.mapquestapi.com//search/v4/place`,
+        url: `https://www.mapquestapi.com//search/v4/place`,
         method: "GET",
         responseType: "json",
         params: {
@@ -105,7 +105,7 @@ class App extends Component {
     }, () => {
       try {
         axios({
-          url: "http://www.mapquestapi.com/directions/v2/route",
+          url: "https://www.mapquestapi.com/directions/v2/route",
           method: "GET",
           responseType: "json",
           params: {
@@ -160,7 +160,7 @@ class App extends Component {
                   }
                 </div>
                 <div className="col-50">
-                  {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={map} alt="anothermap" />}
+                  {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require ("./components/assets/map.jpg")} alt="anothermap" />}
                 </div>
               </div>
               <Directions directionsArray={this.state.directions} />
