@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
-import Header from './Header';
-import SearchList from './SearchList.js';
-import StaticMap from './StaticMap.js';
-import Directions from './Directions.js';
+import Header from './components/Header';
+import SearchList from './components/SearchList.js';
+import StaticMap from './components/StaticMap.js';
+import Directions from './components/Directions.js';
 import Main from './Main';
 import map from './assets/map.jpg'
 
@@ -59,24 +59,12 @@ class App extends Component {
         queryList: results,
         searchResults: true,
         location,
-        // coordinates: `${lng}, ${lat}`,
       })
-
       // Handle error if promise is rejected
     } catch (error) {
       console.log(`Axios request is failed ${error}`);
     }
   }
-
-  // function to map through the queryList array *Someone fix please
-  // searchResultsArray = () => {
-  //   // return this.state.queryList
-
-  //   let searchResults = this.state.queryList.map( => {
-
-  //   })
-
-  // }
 
   // Handle button click
   handleClick = async (e, location, query) => {
@@ -101,15 +89,10 @@ class App extends Component {
           size: '600,600'
         }
       })
-      console.log(this.state.queryList);
-      // console.log(this.state.queryList.displayString);
 
       this.setState({
         mapImageData: URL.createObjectURL(mapData.data),
       })
-      //console.log (this.state.mapImageData)
-
-
     } catch (error) {
       console.log(`Axios request is failed ${error}`);
     }
@@ -120,9 +103,6 @@ class App extends Component {
     this.setState({
       destination: toAddress,
     }, () => {
-      console.log(this.state.location);
-      console.log(this.state.destination);
-
       try {
         axios({
           url: "http://www.mapquestapi.com/directions/v2/route",
@@ -139,7 +119,6 @@ class App extends Component {
           this.setState({
             directions: response,
           })
-          console.log(this.state.directions);
         })// when user clicks on a destination button, it will render the map from the api call to show the route
         axios({
           method: 'GET',
@@ -155,12 +134,10 @@ class App extends Component {
         }).then((response) => {
           this.setState({
             mapImageData: URL.createObjectURL(response.data),
-
           })
-          console.log(response.data)
         })
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        console.log(`Axios request is failed ${error}`);
       }
     })
   }
@@ -168,26 +145,28 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <Header handleClick={this.handleClick} />
-        <Main>
-          <div className="row">
-            <div className="search-list col-50">
-              {
-                this.state.searchResults ?
-                  <SearchList query={this.state.queryList}
-                    onClick={this.destinationClick} />
-                  : <div />
-              }
-            </div>
-            <div className="col-50">
-              {this.state.mapImageData ? <img src={this.state.mapImageData} alt="map"/> : <img src={map} alt="anothermap"/>} 
-            </div>
+      <div className="wrapper">
+        <div className="container">
+          <div className="col-80">
+            <Header handleClick={this.handleClick} />
+            <Main>
+              <div className="row">
+                <div className="search-list col-50">
+                  {
+                    this.state.searchResults ?
+                      <SearchList query={this.state.queryList}
+                        onClick={this.destinationClick} />
+                      : <p>Loading...</p>
+                  }
+                </div>
+                <div className="col-50">
+                  {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={map} alt="anothermap" />}
+                </div>
+              </div>
+              <Directions directionsArray={this.state.directions} />
+            </Main>
           </div>
-          <Directions directionsArray={this.state.directions} />
-        </Main>
-
-
+        </div>
       </div>
     );
   }
