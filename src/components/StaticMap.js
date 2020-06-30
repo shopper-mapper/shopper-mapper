@@ -10,7 +10,6 @@ class StaticMap extends Component {
     }
   }
 
-
   async componentDidMount() {
     try {
       const mapData = await axios({

@@ -14,7 +14,7 @@ class SearchList extends Component {
                 this.props.query.length > 0 ? 
                 this.props.query.map (results => {
                     return (
-                    <button key={results.id}
+                    <button className="query-btn" key={results.id}
                     id={results.id}
                     value ={results.displayString}
                     onClick={this.searchResult}>{results.displayString}</button>

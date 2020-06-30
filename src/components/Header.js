@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
+import { faSearch} from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -44,8 +44,8 @@ class Header extends Component {
                         </div>
                     </div>
 
-                    <div className="col-auto">
-                        <button className="button" onClick={(event) => this.props.handleClick(event, this.state.userInputlocation, this.state.userInputQuery,)} type='submit'><FontAwesomeIcon icon={faGlobeAmericas} size="2x" /></button>
+                    <div className="col-auto header-search-btn">
+                        <button className="button" onClick={(event) => this.props.handleClick(event, this.state.userInputlocation, this.state.userInputQuery,)} type='submit'><FontAwesomeIcon className="search-icon" icon={faSearch}/></button>
                     </div>
                 </form>
             </header>
