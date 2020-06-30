@@ -1,22 +1,23 @@
 {
   "files": {
     "main.css": "/shopper-mapper/static/css/main.18e19915.chunk.css",
-    "main.js": "/shopper-mapper/static/js/main.3b1a1a67.chunk.js",
-    "main.js.map": "/shopper-mapper/static/js/main.3b1a1a67.chunk.js.map",
+    "main.js": "/shopper-mapper/static/js/main.5a5fc34f.chunk.js",
+    "main.js.map": "/shopper-mapper/static/js/main.5a5fc34f.chunk.js.map",
     "runtime-main.js": "/shopper-mapper/static/js/runtime-main.6c0cfe4a.js",
     "runtime-main.js.map": "/shopper-mapper/static/js/runtime-main.6c0cfe4a.js.map",
     "static/js/2.ed196142.chunk.js": "/shopper-mapper/static/js/2.ed196142.chunk.js",
     "static/js/2.ed196142.chunk.js.map": "/shopper-mapper/static/js/2.ed196142.chunk.js.map",
     "index.html": "/shopper-mapper/index.html",
-    "precache-manifest.0b2fe0a1c80a9e8335c758c8f4f1f684.js": "/shopper-mapper/precache-manifest.0b2fe0a1c80a9e8335c758c8f4f1f684.js",
+    "precache-manifest.321752a12f34b0dfdb60320a458a545f.js": "/shopper-mapper/precache-manifest.321752a12f34b0dfdb60320a458a545f.js",
     "service-worker.js": "/shopper-mapper/service-worker.js",
     "static/css/main.18e19915.chunk.css.map": "/shopper-mapper/static/css/main.18e19915.chunk.css.map",
-    "static/js/2.ed196142.chunk.js.LICENSE.txt": "/shopper-mapper/static/js/2.ed196142.chunk.js.LICENSE.txt"
+    "static/js/2.ed196142.chunk.js.LICENSE.txt": "/shopper-mapper/static/js/2.ed196142.chunk.js.LICENSE.txt",
+    "static/media/map.jpg": "/shopper-mapper/static/media/map.e9e08731.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.6c0cfe4a.js",
     "static/js/2.ed196142.chunk.js",
     "static/css/main.18e19915.chunk.css",
-    "static/js/main.3b1a1a67.chunk.js"
+    "static/js/main.5a5fc34f.chunk.js"
   ]
 }

@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4d2b78b56ea67165428820127f9e43b3",
+    "revision": "14a95f41a9d56b325d4c84481f2e2606",
     "url": "/shopper-mapper/index.html"
   },
   {
-    "revision": "894223787875be68ee42",
+    "revision": "b249e8c42c6a1161a384",
     "url": "/shopper-mapper/static/css/main.18e19915.chunk.css"
   },
   {
@@ -16,11 +16,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shopper-mapper/static/js/2.ed196142.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "894223787875be68ee42",
-    "url": "/shopper-mapper/static/js/main.3b1a1a67.chunk.js"
+    "revision": "b249e8c42c6a1161a384",
+    "url": "/shopper-mapper/static/js/main.5a5fc34f.chunk.js"
   },
   {
     "revision": "04a9ad81a4b17f8250e2",
     "url": "/shopper-mapper/static/js/runtime-main.6c0cfe4a.js"
+  },
+  {
+    "revision": "e9e08731cee548ba891dc7c41df42671",
+    "url": "/shopper-mapper/static/media/map.e9e08731.jpg"
   }
 ]);
