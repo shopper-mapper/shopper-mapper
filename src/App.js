@@ -6,6 +6,8 @@ import SearchList from './components/SearchList.js';
 import StaticMap from './components/StaticMap.js';
 import Directions from './components/Directions.js';
 import Main from './Main';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
 
@@ -177,6 +179,9 @@ class App extends Component {
   }
 
 
+  
+
+
   render() {
     return (
       <div className="wrapper">
@@ -185,19 +190,37 @@ class App extends Component {
             <Header handleClick={this.handleClick} />
             <Main>
               <div className="row">
-                <div className="search-list col-50">
-                  {
-                    this.state.searchResults ?
-                      <SearchList query={this.state.queryList} median={this.state.middleLocation}
-                        onClick={this.destinationClick} />
-                      : <p>Loading...</p>
-                  }
-                </div>
-                <div className="col-50">
-                  {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require ("./components/assets/map.jpg")} alt="anothermap" />}
-                </div>
+                
+                
+                <Router>
+
+                  <div className="search-list col-50">
+                      {
+                        this.state.searchResults ?
+                          <SearchList query={this.state.queryList} median={this.state.middleLocation}
+                            onClick={this.destinationClick} />
+                          : <p>Loading...</p>
+                      }
+                  </div>
+
+                  <div className="col-50">
+                      {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require ("./components/assets/map.jpg")} alt="anothermap" />}
+                    
+                    <button>
+                      <Link to="/Directions">Directions</Link>
+                    </button>
+                  </div>
+                  
+                    <Route exact path="/" component={Directions} />
+                    <Route path="/directions">       
+
+                  
+
+                </Router>
+
               </div>
-              <Directions directionsArray={this.state.directions} />
+                {/* <Directions directionsArray={this.state.directions} /> */}
+
             </Main>
           </div>
         </div>
