@@ -6,9 +6,6 @@ import SearchList from './components/SearchList.js';
 import StaticMap from './components/StaticMap.js';
 import Directions from './components/Directions.js';
 import Main from './Main';
-import { 
-  BrowserRouter as Router, 
-  Route, Link } from 'react-router-dom';
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
 
@@ -185,7 +182,6 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
         <div className="wrapper">
           <div className="container">
             <div className="col-80">
@@ -213,7 +209,6 @@ class App extends Component {
             </div>
           </div>
         </div>
-      </Router>
     );
   }
 }
