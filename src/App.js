@@ -6,7 +6,6 @@ import SearchList from './components/SearchList.js';
 import StaticMap from './components/StaticMap.js';
 import Directions from './components/Directions.js';
 import Main from './Main';
-// import map from './assets/map.jpg'
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
 
@@ -22,6 +21,7 @@ class App extends Component {
       directions: [],
       mapImageData: '',
       location: '',
+      addressString: '',
     }
   }
 
@@ -84,14 +84,20 @@ class App extends Component {
           // passes the user current location and the query list addresses
           // this can be obtained by grabbing the displayString that holds the address
           // replace ${this.state.queryList[0].displayString} with the function call above
-          locations: `${this.state.location} || ${this.state.queryList[0].displayString}`,
+          locations: `${this.state.location} + ${this.state.addressString}`,
           shape: `radius:10km|${this.state.location}`,
           size: '600,600'
         }
       })
+     
+      const locationMarkers = this.state.queryList.map(function (addressString) {
+        return addressString.displayString;
+      }).join(" || ");
 
+  
       this.setState({
         mapImageData: URL.createObjectURL(mapData.data),
+        addressString: locationMarkers
       })
     } catch (error) {
       console.log(`Axios request is failed ${error}`);

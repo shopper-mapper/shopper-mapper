@@ -6,23 +6,24 @@ class SearchList extends Component {
         const address = e.currentTarget.value;
         this.props.onClick(address);
     }
-
+    
     render() {
         return (
-            <div>
-                {
-                this.props.query.length > 0 ? 
-                this.props.query.map (results => {
+          <div>
+            {
+              this.props.query.length > 0 ?
+                this.props.query.map(results => {
                     return (
-                    <button className="query-btn" key={results.id}
-                    id={results.id}
-                    value ={results.displayString}
-                    onClick={this.searchResult}>{results.displayString}</button>
+                      < button className="query-btn" key={results.id}
+                        id={results.id}
+                        value={results.displayString}
+                        onClick={this.searchResult} > {results.displayString}</ button>
                     )
+                  }
                 })
                 : <p>No results!</p>
             }
-            </div>
+          </div >
         )
     }
 }
