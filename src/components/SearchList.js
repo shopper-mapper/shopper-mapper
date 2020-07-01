@@ -9,18 +9,25 @@ class SearchList extends Component {
     
     render() {
         return (
-          <div>
-            {
-              this.props.query.length > 0 ?
-                this.props.query.map(results => {
+            <div>
+
+                {
+                this.props.query.length > 0 ? 
+                this.props.query.map ((results, index) => {
                     return (
-                      < button className="query-btn" key={results.id}
+
+                        <button className = { this.props.median.includes(index) ? "query-btn highlighted" : "query-btn"}
+                        key={results.id}
                         id={results.id}
-                        value={results.displayString}
-                        onClick={this.searchResult} > {results.displayString}</ button>
+                        value ={results.displayString}
+                        onClick={this.searchResult}
+
+                        >{results.displayString}
+                        </button>
+
                     )
                   }
-                })
+                )
                 : <p>No results!</p>
             }
           </div >

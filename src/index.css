@@ -463,6 +463,10 @@ form.row {
   border-radius: 5px;
 }
 
+.highlighted {
+  background-color: red;
+}
+
 .query-image {
   height: 100%;
   object-fit: cover;
@@ -527,3 +531,6 @@ form.row {
     justify-content: space-between;
   }
 }
+
+
+
