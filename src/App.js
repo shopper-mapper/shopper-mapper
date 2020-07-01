@@ -6,8 +6,6 @@ import SearchList from './components/SearchList.js';
 import StaticMap from './components/StaticMap.js';
 import Directions from './components/Directions.js';
 import Main from './Main';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
 
@@ -87,13 +85,13 @@ class App extends Component {
   // else, return two numbers (even)
   // it will be stored into the variable "highlightMedian" which will be stored in the state "middleLocation"
   findMiddle = () => {
-    let median = Math.floor((this.state.queryList.length - 1) /2);
+    let median = Math.floor((this.state.queryList.length - 1) / 2);
     let highlightMedian = [];
 
-    if(this.state.queryList.length % 2) {
-        highlightMedian = [median];
+    if (this.state.queryList.length % 2) {
+      highlightMedian = [median];
     } else {
-        highlightMedian = [median, median + 1];
+      highlightMedian = [median, median + 1];
     }
     this.setState({
       middleLocation: highlightMedian,
@@ -179,9 +177,6 @@ class App extends Component {
   }
 
 
-  
-
-
   render() {
     return (
       <div className="wrapper">
@@ -190,37 +185,19 @@ class App extends Component {
             <Header handleClick={this.handleClick} />
             <Main>
               <div className="row">
-                
-                
-                <Router>
-
-                  <div className="search-list col-50">
-                      {
-                        this.state.searchResults ?
-                          <SearchList query={this.state.queryList} median={this.state.middleLocation}
-                            onClick={this.destinationClick} />
-                          : <p>Loading...</p>
-                      }
-                  </div>
-
-                  <div className="col-50">
-                      {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require ("./components/assets/map.jpg")} alt="anothermap" />}
-                    
-                    <button>
-                      <Link to="/Directions">Directions</Link>
-                    </button>
-                  </div>
-                  
-                    <Route exact path="/" component={Directions} />
-                    <Route path="/directions">       
-
-                  
-
-                </Router>
-
+                <div className="search-list col-50">
+                  {
+                    this.state.searchResults ?
+                      <SearchList query={this.state.queryList} median={this.state.middleLocation}
+                        onClick={this.destinationClick} />
+                      : <p>Loading...</p>
+                  }
+                </div>
+                <div className="col-50">
+                  {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require("./components/assets/map.jpg")} alt="anothermap" />}
+                </div>
               </div>
-                {/* <Directions directionsArray={this.state.directions} /> */}
-
+              <Directions directionsArray={this.state.directions} />
             </Main>
           </div>
         </div>

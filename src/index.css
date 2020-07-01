@@ -9,6 +9,10 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 
 /* General styles */
 
+/* #c4e39C */
+/* 5BC5FF */
+/* #FF9D75 */
+
 @import url('https://fonts.googleapis.com/css2?family=Barlow&family=Cormorant+Garamond:wght@500&display=swap');
 
 html {
@@ -42,13 +46,18 @@ li {
 h1,
 h2,
 h3,
-p {
+p,
+label {
   margin: 0;
-  font-family: 'barlow';
+  font-family: 'Barlow';
 }
 
 h1 {
   font-family: 'Cormorant Garamond';
+  font-size: 50px;
+  color: #fff;
+  text-transform: uppercase;
+  padding-bottom: 25px;
 }
 
 img {
@@ -92,7 +101,7 @@ a {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 80px 0;
+  padding: 40px 0 80px 0;
 }
 
 /* Header component */

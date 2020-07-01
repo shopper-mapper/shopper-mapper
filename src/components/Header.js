@@ -31,6 +31,8 @@ class Header extends Component {
 
     render() {
         return (
+          <div className="title">
+            <h1>Shopper Mapper</h1>
             <header className="header">
                 <form className="row" action="">
                     <div className="header-search col-auto">
@@ -49,6 +51,7 @@ class Header extends Component {
                     </div>
                 </form>
             </header>
+          </div>
         )
     }
 }
