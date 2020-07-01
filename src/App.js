@@ -21,7 +21,8 @@ class App extends Component {
       directions: [],
       mapImageData: '',
       location: '',
-      addressString: '',
+      middleLocation: [],
+      range: 10000,
     }
   }
 
@@ -47,7 +48,8 @@ class App extends Component {
         responseType: "json",
         params: {
           // Passing long, lat from  (Get Geocode Address API see below) to check the response
-          location: `${lng}, ${lat}`,
+          circle: `${lng}, ${lat}, ${this.state.range}`,
+          pageSize: 20,
           key: API_KEY,
           sort: "relevance",
           q: query,
@@ -66,6 +68,36 @@ class App extends Component {
     }
   }
 
+  // function to map through the queryList array and to convert to a string
+  // as well, use the method includes() to determine if the value of the index passing matches with what is stored in middleLocation
+  // if the current index is in highlighted locations, appending a special marker if so
+  // '||' is mapquest api's way of a comma to separate addresses
+  searchResultsArray = () => {
+    const locationMarkers = this.state.queryList.map((item, index) => {
+      return item.displayString + (this.state.middleLocation.includes(index) ? "|marker-red" : "");
+    }).join("||");
+
+    return locationMarkers;
+  }
+
+  // function to find the median of the query list array
+  // if odd, return one number
+  // else, return two numbers (even)
+  // it will be stored into the variable "highlightMedian" which will be stored in the state "middleLocation"
+  findMiddle = () => {
+    let median = Math.floor((this.state.queryList.length - 1) /2);
+    let highlightMedian = [];
+
+    if(this.state.queryList.length % 2) {
+        highlightMedian = [median];
+    } else {
+        highlightMedian = [median, median + 1];
+    }
+    this.setState({
+      middleLocation: highlightMedian,
+    })
+  }
+
   // Handle button click
   handleClick = async (e, location, query) => {
     e.preventDefault();
@@ -74,6 +106,9 @@ class App extends Component {
     // when user inputs location and query
     // have the map to render the user location and query list with markers
     try {
+      // calls the function findMiddle()
+      this.findMiddle();
+
       const mapData = await axios({
         method: 'GET',
         url: 'https://www.mapquestapi.com/staticmap/v5/map',
@@ -82,26 +117,19 @@ class App extends Component {
           key: `tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15`,
           scalebar: 'true|bottom',
           // passes the user current location and the query list addresses
-          // this can be obtained by grabbing the displayString that holds the address
-          // replace ${this.state.queryList[0].displayString} with the function call above
-          locations: `${this.state.location} + ${this.state.addressString}`,
+          locations: this.state.location + this.searchResultsArray(),
           shape: `radius:10km|${this.state.location}`,
           size: '600,600'
         }
       })
-     
-      const locationMarkers = this.state.queryList.map(function (addressString) {
-        return addressString.displayString;
-      }).join(" || ");
 
-  
       this.setState({
         mapImageData: URL.createObjectURL(mapData.data),
-        addressString: locationMarkers
       })
     } catch (error) {
       console.log(`Axios request is failed ${error}`);
     }
+
   }
 
   // handles the directions when user clicks a destination
@@ -160,7 +188,7 @@ class App extends Component {
                 <div className="search-list col-50">
                   {
                     this.state.searchResults ?
-                      <SearchList query={this.state.queryList}
+                      <SearchList query={this.state.queryList} median={this.state.middleLocation}
                         onClick={this.destinationClick} />
                       : <p>Loading...</p>
                   }
