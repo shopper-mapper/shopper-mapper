@@ -6,6 +6,9 @@ import SearchList from './components/SearchList.js';
 import StaticMap from './components/StaticMap.js';
 import Directions from './components/Directions.js';
 import Main from './Main';
+import { 
+  BrowserRouter as Router, 
+  Route, Link } from 'react-router-dom';
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
 
@@ -23,6 +26,7 @@ class App extends Component {
       location: '',
       middleLocation: [],
       range: 10000,
+      directionsArr: false,
     }
   }
 
@@ -168,6 +172,8 @@ class App extends Component {
         }).then((response) => {
           this.setState({
             mapImageData: URL.createObjectURL(response.data),
+            directionsArr: true,
+            searchResults: false,
           })
         })
       } catch (error) {
@@ -179,29 +185,35 @@ class App extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div className="container">
-          <div className="col-80">
-            <Header handleClick={this.handleClick} />
-            <Main>
-              <div className="row">
-                <div className="search-list col-50">
-                  {
-                    this.state.searchResults ?
-                      <SearchList query={this.state.queryList} median={this.state.middleLocation}
-                        onClick={this.destinationClick} />
-                      : <p>Loading...</p>
-                  }
+      <Router>
+        <div className="wrapper">
+          <div className="container">
+            <div className="col-80">
+              <Header handleClick={this.handleClick} />
+              <Main>
+                <div className="row">
+                  <div className="search-list col-50">
+                    {
+                      this.state.searchResults ?
+                        <SearchList query={this.state.queryList} median={this.state.middleLocation}
+                          onClick={this.destinationClick} />
+                          : <p></p>
+                    }
+                    {
+                      this.destinationClick ?
+                        <Directions directionsArray={this.state.directions} />
+                        : <p></p>
+                    }                
+                  </div>
+                  <div className="col-50">
+                    {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require ("./components/assets/map.jpg")} alt="anothermap" />}
+                  </div>
                 </div>
-                <div className="col-50">
-                  {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require ("./components/assets/map.jpg")} alt="anothermap" />}
-                </div>
-              </div>
-              <Directions directionsArray={this.state.directions} />
-            </Main>
+              </Main>
+            </div>
           </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
