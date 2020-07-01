@@ -94,18 +94,7 @@ class App extends Component {
         return addressString.displayString;
       }).join(" || ");
 
-
-      findMiddle = () => {
-        let middleLocation = Math.floor((this.state.queryList.length - 1) / 2);
-        console.log(middleLocation);
-        if (this.state.queryList.length % 2) {
-          return this.state.queryList[middleLocation];
-        } else {
-          return (this.state.queryList[middleLocation] + this.state.queryList[middleLocation + 1]) / 2;
-        }
-      }
-      
-
+  
       this.setState({
         mapImageData: URL.createObjectURL(mapData.data),
         addressString: locationMarkers
