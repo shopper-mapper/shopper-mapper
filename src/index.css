@@ -442,6 +442,10 @@ form.row {
 }
 
 /* Main component */
+main .row {
+  max-height: 500px;
+}
+
 .search-list {
   background-color: #ffffff;
   padding: 40px;
@@ -449,7 +453,6 @@ form.row {
 
 .search-list.col-50 {
   overflow: auto;
-  max-height: 500px;
 }
 
 .query-btn {
@@ -492,6 +495,7 @@ form.row {
 @media (max-width: 860px) {
   main .row {
     flex-direction: column;
+    max-height: unset;
   }
 
   form.row {
@@ -518,11 +522,11 @@ form.row {
     width: 90%;
   }
 
-  .header, 
+  .header,
   .search-list {
     padding: 20px;
   }
-  
+
   .header-search-btn {
     margin: 0;
   }
@@ -531,6 +535,3 @@ form.row {
     justify-content: space-between;
   }
 }
-
-
-
