@@ -187,6 +187,11 @@ main .row {
   object-fit: cover;
 }
 
+.directions-back-btn {
+  background-color: rgba(65, 64, 124, 0.8);
+  border: none;
+}
+
 /* Portrait tablet and large desktops */
 @media (max-width: 1200px) {
   .col-80 {

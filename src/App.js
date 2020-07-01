@@ -23,6 +23,7 @@ class App extends Component {
       location: '',
       middleLocation: [],
       range: 10000,
+      directionsArr: false,
     }
   }
 
@@ -168,6 +169,8 @@ class App extends Component {
         }).then((response) => {
           this.setState({
             mapImageData: URL.createObjectURL(response.data),
+            directionsArr: true,
+            searchResults: false,
           })
         })
       } catch (error) {
@@ -179,19 +182,28 @@ class App extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div className="container">
-          <div className="col-80">
-            <Header handleClick={this.handleClick} />
-            <Main>
-              <div className="row">
-                <div className="search-list col-50">
-                  {
-                    this.state.searchResults ?
-                      <SearchList query={this.state.queryList} median={this.state.middleLocation}
-                        onClick={this.destinationClick} />
-                      : <p>Loading...</p>
-                  }
+        <div className="wrapper">
+          <div className="container">
+            <div className="col-80">
+              <Header handleClick={this.handleClick} />
+              <Main>
+                <div className="row">
+                  <div className="search-list col-50">
+                    {
+                      this.state.searchResults ?
+                        <SearchList query={this.state.queryList} median={this.state.middleLocation}
+                          onClick={this.destinationClick} />
+                          : <p></p>
+                    }
+                    {
+                      this.destinationClick ?
+                        <Directions directionsArray={this.state.directions} />
+                        : <p></p>
+                    }                
+                  </div>
+                  <div className="col-50">
+                    {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require ("./components/assets/map.jpg")} alt="anothermap" />}
+                  </div>
                 </div>
                 <div className="col-50">
                   {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require("./components/assets/map.jpg")} alt="anothermap" />}
@@ -201,7 +213,6 @@ class App extends Component {
             </Main>
           </div>
         </div>
-      </div>
     );
   }
 }
