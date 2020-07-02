@@ -12,6 +12,7 @@ class Header extends Component {
         this.state = {
             userInputlocation: '',
             userInputQuery: '',
+            // disabled: false,
         }
     }
 
@@ -28,6 +29,15 @@ class Header extends Component {
         })
     }
 
+    // geoLocation = () => {
+    //      this.props.getUserLocation().then(response => console.log("DONE"));
+    //         this.setState({
+    //             disabled: true,
+    //             userInputlocation: this.props.geoAddress,
+    //         }, () => 
+    //         console.log(this.props.geoAddress)
+    //         );
+    // }
 
     render() {
         return (
@@ -36,11 +46,18 @@ class Header extends Component {
                     <div className="header-search col-auto">
                         <div>
                             <label className="sr-only" htmlFor="searchLocation">Enter location:</label>
-                            <input className="input input-location" onChange={this.handleChangeLocation} type="text" name="searchLocation" id="searchLocation" placeholder="Your location" />
+                            <input className="input input-location" onChange={this.handleChangeLocation}
+                             type="text" name="searchLocation" id="searchLocation" placeholder="Your location" />
                         </div>
                         <div>
                             <label className="sr-only" htmlFor="searchQuery">Enter query:</label>
                             <input className="input input-query" onChange={this.handleChangeQuery} type="text" name="searchQuery" id="searchQuery" placeholder="Your query" />
+                        </div>
+                        {/* THIS IS THE CHECKBOX FOR USING CURRENT USER LOCATION */}
+                        <div>
+                            <label className="checkbox" htmlFor="currentLocation">
+                                <input type="checkbox" name="currentLocation" id="currentLocation" onChange={this.props.getUserLocation} />
+                            </label>
                         </div>
                     </div>
 
