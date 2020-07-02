@@ -10,7 +10,6 @@ class SearchList extends Component {
     render() {
         return (
             <div>
-
                 {
                 this.props.query.length > 0 ? 
                 this.props.query.map ((results, index) => {
@@ -24,7 +23,6 @@ class SearchList extends Component {
 
                         >{results.displayString}
                         </button>
-
                     )
                   }
                 )
