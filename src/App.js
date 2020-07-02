@@ -24,11 +24,16 @@ class App extends Component {
       middleLocation: [],
       range: 10000,
       directionsArr: false,
+      loading: false,
     }
   }
 
 
   async getQueries(location, query) {
+    // Show loading message 
+    this.setState({
+      loading: true,
+    })
     //  Pass lat/long from (Geocode Address API) here ↓ , in (Place Search API)
     try {
       // Retrieve coordinates data (lat, long) + await for a promise to be resolved
@@ -62,6 +67,7 @@ class App extends Component {
         queryList: results,
         searchResults: true,
         location,
+        loading: false,
       })
       // Handle error if promise is rejected
     } catch (error) {
@@ -86,13 +92,13 @@ class App extends Component {
   // else, return two numbers (even)
   // it will be stored into the variable "highlightMedian" which will be stored in the state "middleLocation"
   findMiddle = () => {
-    let median = Math.floor((this.state.queryList.length - 1) /2);
+    let median = Math.floor((this.state.queryList.length - 1) / 2);
     let highlightMedian = [];
 
-    if(this.state.queryList.length % 2) {
-        highlightMedian = [median];
+    if (this.state.queryList.length % 2) {
+      highlightMedian = [median];
     } else {
-        highlightMedian = [median, median + 1];
+      highlightMedian = [median, median + 1];
     }
     this.setState({
       middleLocation: highlightMedian,
@@ -137,6 +143,7 @@ class App extends Component {
   destinationClick = (toAddress) => {
     this.setState({
       destination: toAddress,
+      loading: true,
     }, () => {
       try {
         axios({
@@ -153,6 +160,7 @@ class App extends Component {
 
           this.setState({
             directions: response,
+            loading: false,
           })
         })// when user clicks on a destination button, it will render the map from the api call to show the route
         axios({
@@ -179,36 +187,43 @@ class App extends Component {
     })
   }
 
+  handleBackButton = (e) => {
+    e.preventDefault();
+    // show search results and hide directions arr
+    this.setState({
+      directionsArr: false,
+      searchResults: true,
+    })
+  }
+
 
   render() {
     return (
-        <div className="wrapper">
-          <div className="container">
-            <div className="col-80">
-              <Header handleClick={this.handleClick} />
-              <Main>
-                <div className="row">
-                  <div className="search-list col-50">
-                    {
-                      this.state.searchResults ?
-                        <SearchList query={this.state.queryList} median={this.state.middleLocation}
-                          onClick={this.destinationClick} />
-                          : <p></p>
-                    }
-                    {
-                      this.destinationClick ?
-                        <Directions directionsArray={this.state.directions} />
-                        : <p></p>
-                    }                
-                  </div>
-                  <div className="col-50">
-                    {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require ("./components/assets/map.jpg")} alt="anothermap" />}
-                  </div>
+      <div className="wrapper">
+        <div className="container">
+          <div className="col-80">
+            <Header handleClick={this.handleClick} />
+            <Main>
+              <div className="row">
+                <div className="search-list col-50">
+                  {this.state.loading ? <p>Loading...</p> : null}
+                  {
+                    this.state.searchResults ?
+                      <SearchList query={this.state.queryList} median={this.state.middleLocation}
+                        onClick={this.destinationClick} />
+                      : null
+                  }
+                  {
+                  this.state.directionsArr ? <Directions handleBackButton={this.handleBackButton} directionsArray={this.state.directions} /> : null}
                 </div>
-              </Main>
-            </div>
+                <div className="col-50">
+                  {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require("./components/assets/map.jpg")} alt="anothermap" />}
+                </div>
+              </div>
+            </Main>
           </div>
         </div>
+      </div>
     );
   }
 }
