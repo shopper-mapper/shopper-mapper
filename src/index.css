@@ -370,6 +370,11 @@ a {
   display: flex;
 }
 
+.row.row--center {
+  justify-content: center;
+  flex-direction: row;
+}
+
 .col-auto {
   flex: 0 1 auto;
 }
@@ -434,11 +439,12 @@ form.row {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transition: all 350ms ease-in-out;
 }
 
 .button:hover,
 .button:focus {
-  box-shadow: 0px 0px 2px rgba(127, 255, 212);
+  box-shadow: 0px 0px 5px rgba(127, 255, 212);
 }
 
 /* Main component */
@@ -455,7 +461,8 @@ main .row {
   overflow: auto;
 }
 
-.query-btn {
+.query-btn,
+.query-item {
   background-color: ghostwhite;
   border: 1px solid gray;
   font-size: 1.4rem;
@@ -466,8 +473,17 @@ main .row {
   border-radius: 5px;
 }
 
+.query-btn:last-child {
+  margin-bottom: 45px;
+}
+
+.query-btn:hover,
+.query-btn:focus {
+  background-color: rgba(96, 84, 132, 0.4);
+}
+
 .highlighted {
-  background-color: red;
+  background-color: rgba(96, 84, 132, 0.7);
 }
 
 .query-image {
@@ -475,9 +491,54 @@ main .row {
   object-fit: cover;
 }
 
+
+/* Directions component */
+.directions-list.row--column {
+  align-items: center;
+}
+
+.directions-back-btn.button,
+.directions-back-btn {
+  box-shadow: unset;
+}
+
 .directions-back-btn {
   background-color: rgba(65, 64, 124, 0.8);
   border: none;
+  margin: 20px 0;
+}
+
+.directions-back-btn:hover,
+.directions-back-btn:focus {
+  background-color: rgba(96, 84, 132, 0.8);
+}
+
+.directions-container {
+  position: relative;
+}
+
+.directions-list {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  padding: 7px;
+  background-color: rgb(148, 145, 228);
+  border-radius: 20px;
+}
+
+.directions-list li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+}
+
+.directions-icon {
+  color: #fff;
 }
 
 /* Portrait tablet and large desktops */
@@ -510,6 +571,10 @@ main .row {
   .col-50 {
     flex: 0 0 100%;
     max-width: 100%;
+  }
+
+  .query-btn:last-child {
+    margin-bottom: 0;
   }
 
   .query-image {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DirectionIcons from './DirectionIcons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,13 +9,14 @@ class Directions extends Component {
     const { directionsArray, handleBackButton } = this.props;
 
     return (
-      <div>
+      <div className="directions-container">
+        <DirectionIcons/>
         {
           directionsArray.map(direction => {
             return (
-              <ol key={direction.index}>
-                <li>{direction.narrative}</li>
-              </ol>
+              <ul key={direction.index}>
+                <li className="query-item">{direction.narrative}</li>
+              </ul>
             )
           })
         }

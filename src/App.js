@@ -5,7 +5,7 @@ import Header from './components/Header';
 import SearchList from './components/SearchList.js';
 import StaticMap from './components/StaticMap.js';
 import Directions from './components/Directions.js';
-import Main from './Main';
+import Main from './components/Main';
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
 
