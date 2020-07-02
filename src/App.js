@@ -3,7 +3,6 @@ import axios from 'axios';
 import './App.css';
 import Header from './components/Header';
 import SearchList from './components/SearchList.js';
-import StaticMap from './components/StaticMap.js';
 import Directions from './components/Directions.js';
 import Main from './components/Main';
 
@@ -25,6 +24,9 @@ class App extends Component {
       range: 10000,
       directionsArr: false,
       loading: false,
+      // usingCurrentLocation: false,
+      userCurrent: [],
+      geoLocation: '',
     }
   }
 
@@ -70,6 +72,54 @@ class App extends Component {
         loading: false,
       })
       // Handle error if promise is rejected
+    } catch (error) {
+      console.log(`Axios request is failed ${error}`);
+    }
+  }
+
+  // function to get the latitude and longtitude of users's current location
+  getUserLocation = () => {
+    // this.setState({
+    //   usingCurrentLocation: true,
+    // })
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.setState({
+          userCurrent: [position.coords.latitude, position.coords.longitude]
+        })
+        console.log(this.state.userCurrent);
+        // if true, run the function to call the reverse api
+        this.reverseLocation();
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.")
+    }
+  }
+  
+  // reverse geo location api call
+  // passes the latitude & longitude of user's current location
+  reverseLocation = async () => {
+    try {
+      const reverseGeo = await axios ({
+        method: 'GET',
+        url: 'http://www.mapquestapi.com/geocoding/v1/reverse',
+        responseType: 'json',
+        params: {
+          key: API_KEY,
+          // use join method, because coordinates are in a array, but we need it as a string
+          location: this.state.userCurrent.join(','),
+        }
+      })
+      
+      const reverseUserAddress = reverseGeo.data.results[0].locations[0];
+
+      console.log(reverseGeo.data.results[0].locations[0]);
+
+      this.setState({
+        geoLocation: `${reverseUserAddress.street}, ${reverseUserAddress.adminArea5}, ${reverseUserAddress.adminArea3}, ${reverseUserAddress.adminArea1}`,
+      })
+      console.log(this.state.geoLocation);
     } catch (error) {
       console.log(`Axios request is failed ${error}`);
     }
@@ -132,11 +182,11 @@ class App extends Component {
 
       this.setState({
         mapImageData: URL.createObjectURL(mapData.data),
+        
       })
     } catch (error) {
       console.log(`Axios request is failed ${error}`);
     }
-
   }
 
   // handles the directions when user clicks a destination
@@ -145,6 +195,7 @@ class App extends Component {
       destination: toAddress,
       loading: true,
     }, () => {
+      console.log(this.state.location);
       try {
         axios({
           url: "https://www.mapquestapi.com/directions/v2/route",
@@ -168,7 +219,7 @@ class App extends Component {
           url: 'https://www.mapquestapi.com/staticmap/v5/map',
           responseType: 'blob',
           params: {
-            key: `tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15`,
+            key: API_KEY,
             scalebar: 'true|bottom',
             start: this.state.location,
             end: this.state.destination,
@@ -202,7 +253,7 @@ class App extends Component {
       <div className="wrapper">
         <div className="container">
           <div className="col-80">
-            <Header handleClick={this.handleClick} />
+            <Header handleClick={this.handleClick} getUserLocation={this.getUserLocation} geoAddress={this.state.geoLocation}/>
             <Main>
               <div className="row">
                 <div className="search-list col-50">

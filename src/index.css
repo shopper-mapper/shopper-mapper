@@ -541,6 +541,13 @@ main .row {
   color: #fff;
 }
 
+.back-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* Portrait tablet and large desktops */
 @media (max-width: 1200px) {
   .col-80 {
