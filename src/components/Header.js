@@ -11,7 +11,6 @@ class Header extends Component {
     }
 
     handleChangeLocation = (e) => {
-        console.log(e.target.value);
         this.setState({
             userInputlocation: e.target.value,
         })
