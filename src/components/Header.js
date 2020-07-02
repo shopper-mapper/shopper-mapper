@@ -46,7 +46,8 @@ class Header extends Component {
                             <input
                                 className="input input-query"
                                 onChange={this.handleChangeQuery}
-                                type="text" name="searchQuery"
+                                type="text" 
+                                name="searchQuery"
                                 id="searchQuery"
                                 placeholder="Your query" />
                         </div>
