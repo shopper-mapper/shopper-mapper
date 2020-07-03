@@ -5,11 +5,11 @@ import Header from './components/Header';
 import SearchList from './components/SearchList.js';
 import Directions from './components/Directions.js';
 import Main from './components/Main';
+import swal from 'sweetalert';
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
 
 class App extends Component {
-
   constructor() {
     super();
 
@@ -24,13 +24,10 @@ class App extends Component {
       range: 10000,
       directionsArr: false,
       loading: false,
-      // usingCurrentLocation: false,
-      userCurrent: [],
-      geoLocation: '',
     }
   }
 
-
+  //Make an axios request
   async getQueries(location, query) {
     // Show loading message 
     this.setState({
@@ -49,7 +46,7 @@ class App extends Component {
         },
       })
 
-      // Retrieve query results + await for a promise to be resolved
+      // Retrieve query results
       const { data: { results } } = await axios({
         url: `https://www.mapquestapi.com//search/v4/place`,
         method: "GET",
@@ -73,74 +70,19 @@ class App extends Component {
       })
       // Handle error if promise is rejected
     } catch (error) {
-      console.log(`Axios request is failed ${error}`);
+      swal("Error has occurred!", `${error}`);
     }
   }
 
-  // function to get the latitude and longtitude of users's current location
-  getUserLocation = () => {
-    // this.setState({
-    //   usingCurrentLocation: true,
-    // })
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.setState({
-          userCurrent: [position.coords.latitude, position.coords.longitude]
-        })
-        console.log(this.state.userCurrent);
-        // if true, run the function to call the reverse api
-        this.reverseLocation();
-      });
-    } else {
-      alert("Geolocation is not supported by this browser.")
-    }
-  }
-  
-  // reverse geo location api call
-  // passes the latitude & longitude of user's current location
-  reverseLocation = async () => {
-    try {
-      const reverseGeo = await axios ({
-        method: 'GET',
-        url: 'http://www.mapquestapi.com/geocoding/v1/reverse',
-        responseType: 'json',
-        params: {
-          key: API_KEY,
-          // use join method, because coordinates are in a array, but we need it as a string
-          location: this.state.userCurrent.join(','),
-        }
-      })
-      
-      const reverseUserAddress = reverseGeo.data.results[0].locations[0];
-
-      console.log(reverseGeo.data.results[0].locations[0]);
-
-      this.setState({
-        geoLocation: `${reverseUserAddress.street}, ${reverseUserAddress.adminArea5}, ${reverseUserAddress.adminArea3}, ${reverseUserAddress.adminArea1}`,
-      })
-      console.log(this.state.geoLocation);
-    } catch (error) {
-      console.log(`Axios request is failed ${error}`);
-    }
-  }
-
-  // function to map through the queryList array and to convert to a string
-  // as well, use the method includes() to determine if the value of the index passing matches with what is stored in middleLocation
-  // if the current index is in highlighted locations, appending a special marker if so
-  // '||' is mapquest api's way of a comma to separate addresses
   searchResultsArray = () => {
     const locationMarkers = this.state.queryList.map((item, index) => {
-      return item.displayString + (this.state.middleLocation.includes(index) ? "|marker-red" : "");
+      return item.displayString + (this.state.middleLocation.includes(index) ? "|marker-green" : "");
     }).join("||");
 
     return locationMarkers;
   }
 
-  // function to find the median of the query list array
-  // if odd, return one number
-  // else, return two numbers (even)
-  // it will be stored into the variable "highlightMedian" which will be stored in the state "middleLocation"
+  // Find middle item in an array
   findMiddle = () => {
     let median = Math.floor((this.state.queryList.length - 1) / 2);
     let highlightMedian = [];
@@ -155,15 +97,13 @@ class App extends Component {
     })
   }
 
-  // Handle button click
+  // On click get user inputs, pass it to the getQueries function
   handleClick = async (e, location, query) => {
     e.preventDefault();
 
     await this.getQueries(location, query);
-    // when user inputs location and query
-    // have the map to render the user location and query list with markers
+
     try {
-      // calls the function findMiddle()
       this.findMiddle();
 
       const mapData = await axios({
@@ -182,20 +122,19 @@ class App extends Component {
 
       this.setState({
         mapImageData: URL.createObjectURL(mapData.data),
-        
+
       })
     } catch (error) {
-      console.log(`Axios request is failed ${error}`);
+      swal("Error has occurred!", `${error}`);
     }
   }
 
-  // handles the directions when user clicks a destination
+  // Handle the directions when user clicks a destination
   destinationClick = (toAddress) => {
     this.setState({
       destination: toAddress,
       loading: true,
     }, () => {
-      console.log(this.state.location);
       try {
         axios({
           url: "https://www.mapquestapi.com/directions/v2/route",
@@ -213,7 +152,8 @@ class App extends Component {
             directions: response,
             loading: false,
           })
-        })// when user clicks on a destination button, it will render the map from the api call to show the route
+        })
+        // when user clicks on a destination button, it will render the map from the api call to show the route
         axios({
           method: 'GET',
           url: 'https://www.mapquestapi.com/staticmap/v5/map',
@@ -233,11 +173,13 @@ class App extends Component {
           })
         })
       } catch (error) {
-        console.log(`Axios request is failed ${error}`);
+        swal("Error has occurred!", `${error}`);
       }
     })
   }
 
+
+  // Update state
   handleBackButton = (e) => {
     e.preventDefault();
     // show search results and hide directions arr
@@ -253,22 +195,40 @@ class App extends Component {
       <div className="wrapper">
         <div className="container">
           <div className="col-80">
-            <Header handleClick={this.handleClick} getUserLocation={this.getUserLocation} geoAddress={this.state.geoLocation}/>
+            <Header
+              handleClick={this.handleClick}
+            />
             <Main>
               <div className="row">
                 <div className="search-list col-50">
-                  {this.state.loading ? <p>Loading...</p> : null}
+                  {
+                    !this.state.queryList.length > 0
+                      ? <p className="main-intro">Welcome to Shopper Mapper - for when you want to go somewhere average.
+                      Enter your location and what you’re looking for (e.g. museum, restaurant, cafe) and we’ll list options within 10km, highlighting what’s not too good, not too bad, but right in the middle.</p>
+                      : null}
+                  {
+                    this.state.loading
+                      ? <p className="main-loading">Loading...</p>
+                      : null
+                  }
                   {
                     this.state.searchResults ?
-                      <SearchList query={this.state.queryList} median={this.state.middleLocation}
+                      <SearchList
+                        query={this.state.queryList}
+                        median={this.state.middleLocation}
                         onClick={this.destinationClick} />
                       : null
                   }
                   {
-                  this.state.directionsArr ? <Directions handleBackButton={this.handleBackButton} directionsArray={this.state.directions} /> : null}
+                    this.state.directionsArr
+                      ? <Directions handleBackButton={this.handleBackButton} directionsArray={this.state.directions} />
+                      : null
+                  }
                 </div>
                 <div className="col-50">
-                  {this.state.mapImageData ? <img className="query-image" src={this.state.mapImageData} alt="map" /> : <img className="query-image" src={require("./components/assets/map.jpg")} alt="anothermap" />}
+                  {this.state.mapImageData
+                    ? <img className="query-image" src={this.state.mapImageData} alt="map" />
+                    : <img className="query-image" src={require("./components/assets/map.jpg")} alt="anothermap" />}
                 </div>
               </div>
             </Main>
