@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "abfadfddb3e73d71894a9b990526eadb",
+    "revision": "c9d4d268127ad38a17519603a60ebea0",
     "url": "/shopper-mapper/index.html"
   },
   {
-    "revision": "ece9221716afc0b6736a",
-    "url": "/shopper-mapper/static/css/main.550b062d.chunk.css"
+    "revision": "b89dc9dc31193f72e2f4",
+    "url": "/shopper-mapper/static/css/main.39dc20e1.chunk.css"
   },
   {
     "revision": "d1ea1cce4d25eb05015b",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shopper-mapper/static/js/2.2f8f1d8b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ece9221716afc0b6736a",
-    "url": "/shopper-mapper/static/js/main.f1f9a639.chunk.js"
+    "revision": "b89dc9dc31193f72e2f4",
+    "url": "/shopper-mapper/static/js/main.2837f16e.chunk.js"
   },
   {
     "revision": "04a9ad81a4b17f8250e2",
@@ -26,5 +26,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "e9e08731cee548ba891dc7c41df42671",
     "url": "/shopper-mapper/static/media/map.e9e08731.jpg"
+  },
+  {
+    "revision": "87b087ac875191739c860b54cb6726ef",
+    "url": "/shopper-mapper/static/media/shopper-mapper-icon.87b087ac.png"
   }
 ]);
