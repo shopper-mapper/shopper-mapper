@@ -9,7 +9,7 @@ import swal from 'sweetalert';
 
 
 
-const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
+const API_KEY = 'gOwGpz9GQdTdYo0tDVNCd1G9QYgmmmu1';
 
 class App extends Component {
   constructor() {
@@ -113,7 +113,7 @@ class App extends Component {
         url: 'https://www.mapquestapi.com/staticmap/v5/map',
         responseType: 'blob',
         params: {
-          key: `tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15`,
+          key: API_KEY,
           scalebar: 'true|bottom',
           // passes the user current location and the query list addresses
           locations: this.state.location + this.searchResultsArray(),
