@@ -62,6 +62,11 @@ class Header extends Component {
                             />
                         </button>
                     </div>
+                    <div className="sm-logo">
+                        <h1>Shopper Mapper</h1>
+                        <img className="sm-icon" src={require("./assets/shopper-mapper-icon.png")} alt="Shopper Mapper Logo"/>
+                    </div>
+
                 </form>
             </header>
         )

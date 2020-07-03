@@ -454,6 +454,22 @@ form.row {
   box-shadow: 0px 0px 5px rgba(127, 255, 212);
 }
 
+h1 {
+  color: #fff;
+  font-size: 3.0rem;
+}
+
+.sm-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sm-icon {
+  width: 80px;
+  height: 80px;
+}
+
 /* Main component */
 main .row {
   max-height: 500px;
