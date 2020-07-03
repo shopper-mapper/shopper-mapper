@@ -39,7 +39,7 @@ class Header extends Component {
                                     type="text"
                                     name="searchLocation"
                                     id="searchLocation"
-                                    placeholder="Your location" />
+                                    placeholder="551 King St W Toronto, ON" />
                             </div>
                             <div>
                                 <label className="sr-only" htmlFor="searchQuery">Enter query:</label>
@@ -49,7 +49,7 @@ class Header extends Component {
                                     type="text"
                                     name="searchQuery"
                                     id="searchQuery"
-                                    placeholder="Your query" />
+                                    placeholder="restaurant" />
                             </div>
                         </div>
                     </div>
