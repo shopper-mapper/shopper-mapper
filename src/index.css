@@ -312,8 +312,6 @@ textarea {
   border: 0;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans");
-
 /* General styles */
 html {
   font-size: 62.5%;
@@ -326,8 +324,6 @@ body {
     rgb(117, 108, 165),
     rgb(101, 101, 166)
   );
-
-  font-family: "Open Sans", sans-serif;
   background-repeat: no-repeat;
   background-size: cover;
   line-height: 1.2;
