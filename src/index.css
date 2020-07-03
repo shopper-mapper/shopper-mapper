@@ -312,12 +312,15 @@ textarea {
   border: 0;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Barlow');
+
 /* General styles */
 html {
   font-size: 62.5%;
 }
 
 body {
+  font-family: 'Barlow', sans-serif;
   background-image: linear-gradient(
     to top,
     rgb(95, 82, 130),
