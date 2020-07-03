@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f2a47287fefd1a8f8e6c270aae343711",
+    "revision": "05f9cd24d779d1240a9b7f521c4a34c9",
     "url": "/shopper-mapper/index.html"
   },
   {
-    "revision": "feb994566782411124fc",
+    "revision": "bbe56f181474c12fb067",
     "url": "/shopper-mapper/static/css/main.39dc20e1.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shopper-mapper/static/js/2.2f8f1d8b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "feb994566782411124fc",
-    "url": "/shopper-mapper/static/js/main.693cac39.chunk.js"
+    "revision": "bbe56f181474c12fb067",
+    "url": "/shopper-mapper/static/js/main.33900961.chunk.js"
   },
   {
     "revision": "04a9ad81a4b17f8250e2",
