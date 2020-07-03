@@ -29,26 +29,28 @@ class Header extends Component {
         return (
             <header className="header">
                 <form className="row" action="">
-                    <div className="header-search col-auto">
+                    <div className="header-search col-35">
                         <div>
-                            <label className="sr-only" htmlFor="searchLocation">Enter location:</label>
-                            <input
-                                className="input input-location"
-                                onChange={this.handleChangeLocation}
-                                type="text"
-                                name="searchLocation"
-                                id="searchLocation"
-                                placeholder="Your location" />
-                        </div>
-                        <div>
-                            <label className="sr-only" htmlFor="searchQuery">Enter query:</label>
-                            <input
-                                className="input input-query"
-                                onChange={this.handleChangeQuery}
-                                type="text" 
-                                name="searchQuery"
-                                id="searchQuery"
-                                placeholder="Your query" />
+                            <div>
+                                <label className="sr-only" htmlFor="searchLocation">Enter location:</label>
+                                <input
+                                    className="input input-location"
+                                    onChange={this.handleChangeLocation}
+                                    type="text"
+                                    name="searchLocation"
+                                    id="searchLocation"
+                                    placeholder="Your location" />
+                            </div>
+                            <div>
+                                <label className="sr-only" htmlFor="searchQuery">Enter query:</label>
+                                <input
+                                    className="input input-query"
+                                    onChange={this.handleChangeQuery}
+                                    type="text"
+                                    name="searchQuery"
+                                    id="searchQuery"
+                                    placeholder="Your query" />
+                            </div>
                         </div>
                     </div>
                     <div className="col-auto header-search-btn">
@@ -64,9 +66,8 @@ class Header extends Component {
                     </div>
                     <div className="sm-logo">
                         <h1>Shopper Mapper</h1>
-                        <img className="sm-icon" src={require("./assets/shopper-mapper-icon.png")} alt="Shopper Mapper Logo"/>
+                        <img className="sm-icon" src={require("./assets/shopper-mapper-icon.png")} alt="Shopper Mapper Logo" />
                     </div>
-
                 </form>
             </header>
         )

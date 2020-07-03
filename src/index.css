@@ -312,7 +312,7 @@ textarea {
   border: 0;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow');
+@import url("https://fonts.googleapis.com/css2?family=Barlow");
 
 /* General styles */
 html {
@@ -320,7 +320,7 @@ html {
 }
 
 body {
-  font-family: 'Barlow', sans-serif;
+  font-family: "Barlow", sans-serif;
   background-image: linear-gradient(
     to top,
     rgb(95, 82, 130),
@@ -331,7 +331,7 @@ body {
   background-size: cover;
   line-height: 1.2;
   min-height: 100vh;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: rgb(63, 63, 63);
 }
 
@@ -368,7 +368,6 @@ a {
   margin: 0 auto;
 }
 
-
 .swal-button {
   background-color: rgba(65, 64, 124, 0.8);
 }
@@ -385,6 +384,11 @@ a {
 
 .col-auto {
   flex: 0 1 auto;
+}
+
+.col-35 {
+  flex: 0 0 35%;
+  max-width: 35%;
 }
 
 .col-50 {
@@ -406,8 +410,13 @@ a {
 
 /* Header component */
 .header {
+  position: relative;
   background-color: rgba(65, 64, 124, 0.8);
   padding: 20px 40px;
+}
+
+.header .row {
+  align-items: center;
 }
 
 form.row {
@@ -423,6 +432,7 @@ form.row {
 .input {
   border: unset;
   padding: 10px 20px;
+  width: 100%;
 }
 
 .input-location {
@@ -430,7 +440,7 @@ form.row {
 }
 
 .header-search-btn {
-  margin: 0 20px;
+  margin: 0 40px;
 }
 
 .button {
@@ -454,20 +464,24 @@ form.row {
   box-shadow: 0px 0px 5px rgba(127, 255, 212);
 }
 
-h1 {
-  color: #fff;
-  font-size: 3.0rem;
-}
-
 .sm-logo {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.sm-logo h1 {
+  color: #fff;
+  font-size: 1.2rem;
 }
 
 .sm-icon {
-  width: 80px;
-  height: 80px;
+  width: 20px;
+  height: 20px;
 }
 
 /* Main component */
@@ -501,7 +515,7 @@ main .row {
 .query-item {
   background-color: ghostwhite;
   border: 1px solid gray;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   width: 100%;
   margin: 5px 0;
   padding: 10px;
@@ -586,6 +600,11 @@ main .row {
 
 /* Portrait tablet and small desktops */
 @media (max-width: 940px) {
+  .col-35 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
   .col-80 {
     flex: 0 100%;
     max-width: 100%;
@@ -598,18 +617,31 @@ main .row {
     padding: 80px 0;
   }
 
-  main .row {
-    flex-direction: column;
-    max-height: unset;
-  }
-
-  form.row {
-    justify-content: space-around;
+  .col-35 {
+    flex: 0 0 60%;
+    max-width: 60%;
   }
 
   .col-50 {
     flex: 0 0 100%;
     max-width: 100%;
+  }
+
+  main .row {
+    flex-direction: column;
+    max-height: unset;
+  }
+
+  .header .row {
+    justify-content: space-between;
+  }
+
+  .header-search-btn {
+    margin: 0;
+  }
+
+  form.row {
+    margin: 30px 0;
   }
 
   .query-btn:last-child {
@@ -631,8 +663,12 @@ main .row {
     width: 90%;
   }
 
-  .header,
-  .search-list {
+  .col-35 {
+    flex: 0 0 70%;
+    max-width: 70%;
+  }
+
+  .header {
     padding: 20px;
   }
 
@@ -642,5 +678,13 @@ main .row {
 
   form.row {
     justify-content: space-between;
+  }
+
+  .search-list {
+    padding: 40px 20px;
+  }
+
+  .directions-list {
+    width: 65%;
   }
 }
