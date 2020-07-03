@@ -369,6 +369,11 @@ a {
   margin: 0 auto;
 }
 
+
+.swal-button {
+  background-color: rgba(65, 64, 124, 0.8);
+}
+
 /* Layout styles */
 .row {
   display: flex;

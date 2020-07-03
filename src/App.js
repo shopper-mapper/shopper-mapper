@@ -5,6 +5,7 @@ import Header from './components/Header';
 import SearchList from './components/SearchList.js';
 import Directions from './components/Directions.js';
 import Main from './components/Main';
+import swal from 'sweetalert';
 
 const API_KEY = 'tZVntk8rKYnj1VeUAi4cTD6mGHgEoP15';
 
@@ -69,7 +70,7 @@ class App extends Component {
       })
       // Handle error if promise is rejected
     } catch (error) {
-      console.log(`Axios request is failed ${error}`);
+      swal("Error has occurred!", `${error}`);
     }
   }
 
@@ -124,7 +125,7 @@ class App extends Component {
 
       })
     } catch (error) {
-      console.log(`Axios request is failed ${error}`);
+      swal("Error has occurred!", `${error}`);
     }
   }
 
@@ -172,7 +173,7 @@ class App extends Component {
           })
         })
       } catch (error) {
-        console.log(`Axios request is failed ${error}`);
+        swal("Error has occurred!", `${error}`);
       }
     })
   }
