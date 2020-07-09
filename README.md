@@ -4,7 +4,7 @@ Shopper Mapper is an interactive React app that draws on Mapquest.com's API to p
 
 Shopper Mapper was developed by **Yuliana Hazda, Allan Blackett, Anny Pham, and Edward Bacal** as part of Juno College's Web Development Bootcamp. 
 
-Live site: https://shopper-mapper.github.io/shopper-mapper/
+**Live site:** https://shopper-mapper.github.io/shopper-mapper/
 
 ## Project Requirements
 
