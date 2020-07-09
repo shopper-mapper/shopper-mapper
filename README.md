@@ -1,4 +1,4 @@
-###Project 6 (agency-style group React application)
+#Project 6 (agency-style group React application)
 
 Shopper Mapper is an interactive React app that draws on Mapquest.com's API to provide users with information on nearby amenties. Using Mapquest's public data, the app allows users to search for amenities such as cafes or museums, returning an array of options from within a 10km radius. From these results, users can select destinations and receive directions from their current location or from one they enter. Additionally, the app highlights the median option from a given set of results, letting users know which is the most average choice. 
 
