@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/shopper-mapper/precache-manifest.afe7126aaab6150bda8749cf77b52788.js"
+  "/shopper-mapper/precache-manifest.d840e66d2e7a38a01871074e6022e559.js"
 );
 
 self.addEventListener('message', (event) => {
