@@ -7,7 +7,7 @@ import Directions from "./components/Directions.js";
 import Main from "./components/Main";
 import swal from "sweetalert";
 
-const key = process.env.API_KEY;
+const key = process.env.REACT_APP_KEY;
 
 class App extends Component {
   constructor() {
@@ -69,7 +69,7 @@ class App extends Component {
           // Passing long, lat from  (Get Geocode Address API see below) to check the response
           circle: `${lng}, ${lat}, ${this.state.range}`,
           pageSize: 20,
-          key: API_KEY,
+          key: key,
           sort: "relevance",
           q: query,
         },
@@ -130,7 +130,7 @@ class App extends Component {
         url: "https://www.mapquestapi.com/staticmap/v5/map",
         responseType: "blob",
         params: {
-          key: API_KEY,
+          key: key,
           scalebar: "true|bottom",
           // passes the user current location and the query list addresses
           locations: this.state.location + this.searchResultsArray(),
@@ -161,7 +161,7 @@ class App extends Component {
             method: "GET",
             responseType: "json",
             params: {
-              key: API_KEY,
+              key: key,
               from: this.state.location,
               to: this.state.destination,
             },
@@ -179,7 +179,7 @@ class App extends Component {
             url: "https://www.mapquestapi.com/staticmap/v5/map",
             responseType: "blob",
             params: {
-              key: API_KEY,
+              key: key,
               scalebar: "true|bottom",
               start: this.state.location,
               end: this.state.destination,
